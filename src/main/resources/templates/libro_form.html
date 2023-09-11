@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Biblioteca</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+</head>
+<body>
+
+<div class="container">
+    <h2>Cargar Libros</h2>
+    <form th:action="@{/libro/registro}" method="POST">
+        <label>Ingrese el ISBN: </label>
+        <input type="number" name="isbn" placeholder="ISBN">
+
+        <label>Ingrese el titulo:</label>
+        <input type="text" name="titulo" placeholder="Titulo">
+
+        <label>Ingrese el anio:</label>
+        <input type="number" name="anio" placeholder="Año">
+
+        <label>Ingrese la cantidad de ejemplares:</label>
+        <input type="number" name="ejemplares" placeholder="Ejemplares">
+
+        <label>Ingrese el id de la editorial</label>
+        <input type="number" name="idEditorial" placeholder="Id Editorial">
+
+        <label>Ingrese el id del autor</label>
+        <input type="number" name="idAutor" placeholder="Id Autor">
+
+        <button type="submit">Enviar</button>
+    </form>
+
+</div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+</body>
+</html>
