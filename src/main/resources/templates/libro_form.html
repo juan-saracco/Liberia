@@ -17,7 +17,7 @@
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse container" id="navbarNav">
+        <div class="collapse navbar-collapse " id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -54,31 +54,31 @@
 </header>
 
 <div class="container mt-4">
-    <h2>Cargar Libros</h2>
+    <h2>Cargar Libro</h2>
     <form th:action="@{/libro/registro}" method="POST">
 
         <div class="form-group">
             <label for="isbn">Ingrese el ISBN:</label>
-            <input type="number" class="form-control" id="isbn" name="isbn" placeholder="ISBN">
+            <input required minlength="3" type="number" class="form-control" id="isbn" name="isbn" placeholder="ISBN">
         </div>
 
         <div class="form-group">
             <label for="titulo">Ingrese el título:</label>
-            <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título">
+            <input required minlength="3" type="text" class="form-control" id="titulo" name="titulo" placeholder="Título">
         </div>
 
         <div class="form-group">
             <label for="anio">Ingrese el año:</label>
-            <input type="number" class="form-control" id="anio" name="anio" placeholder="Año">
+            <input required minlength="3" type="number" class="form-control" id="anio" name="anio" placeholder="Año">
         </div>
 
         <div class="form-group">
             <label for="ejemplares">Ingrese la cantidad de ejemplares:</label>
-            <input type="number" class="form-control" id="ejemplares" name="ejemplares" placeholder="Ejemplares">
+            <input required minlength="3"type="number" class="form-control" id="ejemplares" name="ejemplares" placeholder="Ejemplares">
         </div>
         <div class="form-group">
 
-            <select name="idEditorial">
+            <select required name="idEditorial">
 
                 <option value="">Seleccionar Editorial</option>
 
@@ -92,7 +92,7 @@
         </div>
         <div class="form-group">
 
-            <select name="idAutor">
+            <select required name="idAutor">
 
                 <option value="">Seleccionar Autor</option>
                 <option
@@ -107,20 +107,6 @@
     </form>
 </div>
 
-
-<div th:if="${Error != null}" class="card text-white bg-danger mb-3 mensajeError mt-4">
-    <div class="card-body">
-        <h5 class="card-title">Error:</h5>
-        <p class="card-text" th:text="${Error}"></p>
-    </div>
-</div>
-
-<div th:if="${Exito != null}" class="card text-white bg-succes mb-3 mt-4 mensajeExito">
-        <div class="card-body">
-            <h5 class="card-title">Exito!</h5>
-            <p class="card-text" th:text="${Exito}"></p>
-        </div>
-</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>

@@ -91,10 +91,9 @@ public class LibroControlador {
 
         try {
             libroServicio.modificarLibro(longId, longIsbn,titulo ,intAnio, intEjemplares, longIdEditorial, longIdAutor);
-            modelo.put("exito", "Se cargo el libro: " + libroServicio.obtenerUno(longId));
-            return "libro_lista.html";
-        }catch (Exception e){
 
+            return "redirect:../lista";
+        }catch (Exception e){
             modelo.put("error", e);
             return "libro_lista.html";
         }

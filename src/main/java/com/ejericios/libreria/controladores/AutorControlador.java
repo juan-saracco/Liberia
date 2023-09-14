@@ -42,49 +42,28 @@ public class AutorControlador {
     }
 
     @PostMapping("/modificar/{id}")
-    public String modificar(@PathVariable String id, String nombre, ModelMap modelo){
+    public String modificar(@PathVariable String id, String nombre){
         System.out.println("Esta llegando el string desde el post: " + id);
         Long longId = Long.parseLong(id);
         try {
             autorServicio.modificarAutor(longId, nombre);
 
-            return "redirect:../lista";
         } catch (Exception e) {
-            modelo.put("error", e);
             return "autor_modificar.html";
         }
+        return "redirect:../lista";
     }
 
     @PostMapping("/registro")
-    public String registro(@RequestParam String nombre, ModelMap modelo){
+    public String registro(@RequestParam String nombre){
         try {
             autorServicio.crearAutor(nombre);
-            modelo.put("Exito", "Se registro el autor correctamente");
         } catch (Exception e) {
-            modelo.put("Error", e);
             return "autor_form.html";
         }
         return "index.html";
     }
 
-    /*@DeleteMapping("/borrar")
-    public String borrar(@RequestParam List<String> listaId, ModelMap modelo){
-        //Recorres la lista de id
-        for (String stringId : listaId) {
-            //Pasas los datos de String a Long que es el tipo de dato de tu autorId
-            Long id = Long.parseLong(stringId);
-            //Aquí llamas a tu método eliminar con parametro id
-            try {
-                autorServicio.borrarAutor(id);
-                modelo.put("Exito", "Se borro el autor correctamente");
 
-            } catch (Exception e) {
-                modelo.put("Error", e);
-                return "autor_form.html";
-            }
-        }
-        return "autor_form.html";
-    }
-*/
 
 }

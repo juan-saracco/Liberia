@@ -17,7 +17,7 @@
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse container" id="navbarNav">
+        <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -53,29 +53,31 @@
     </nav>
 </header>
 
-<div class="container-fluid m-5 contenedor">
+<div class="container p-5 m-5 contenedor">
+    <h2>Modificar Libro</h2>
+
     <form class="form formulario" th:action="@{/libro/modificar/__${libro.id}__}" method="POST">
         <div class="form-group my-3">
 
             <input hidden th:value="${libro.id}" name="id">
 
             <label for="isbn" class="mb-2">Modificar ISBN</label>
-            <input th:value="${libro.isbn}" type="number" class="form-control" id="isbn" name="isbn">
+            <input required minlength="3" th:value="${libro.isbn}" type="number" class="form-control mb-3" id="isbn" name="isbn">
 
             <label for="titulo" class="mb-2">Titulo</label>
-            <input th:value="${libro.titulo}" type="text" class="form-control" id="titulo" name="titulo">
+            <input required minlength="3" th:value="${libro.titulo}" type="text" class="form-control mb-3" id="titulo" name="titulo">
 
             <label for="anio" class="mb-2">Anio</label>
-            <input th:value="${libro.anio}" type="number" class="form-control" id="anio" name="anio">
+            <input required minlength="3" th:value="${libro.anio}" type="number" class="form-control mb-3" id="anio" name="anio">
 
             <label for="ejemplares" class="mb-2">Ejemplares</label>
-            <input th:value="${libro.ejemplares}" type="number" class="form-control" id="ejemplares" name="ejemplares">
+            <input required minlength="3" th:value="${libro.ejemplares}" type="number" class="form-control mb-3" id="ejemplares" name="ejemplares">
 
             <label for="idEditorial" class="mb-2">Editorial</label>
-            <input th:value="${libro.editorial.id}" type="number" class="form-control" id="idEditorial" name="idEditorial">
+            <input required minlength="3" th:value="${libro.editorial.id}" type="number" class="form-control mb-3" id="idEditorial" name="idEditorial">
 
             <label for="idAutor" class="mb-2">Autor</label>
-            <input th:value="${libro.autor.id}" type="number" class="form-control" id="idAutor" name="idAutor">
+            <input required minlength="3" th:value="${libro.autor.id}" type="number" class="form-control mb-2" id="idAutor" name="idAutor">
 
         </div>
         <button type="submit" class="btn btn-outline-success">Actualizar</button>

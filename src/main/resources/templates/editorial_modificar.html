@@ -17,7 +17,7 @@
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse container" id="navbarNav">
+    <div class="collapse navbar-collapse " id="navbarNav">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -53,13 +53,15 @@
   </nav>
 </header>
 
-<div class="container-fluid m-5 contenedor">
+<div class="container-sm p-5 m-5 contenedor">
+  <h2>Modificar Editorial</h2>
+
   <form class="form formulario" th:action="@{/editorial/modificar/__${editorial.id}__}" method="POST">
     <div class="form-group my-3">
       <input hidden th:value="${editorial.id}" name="id">
 
       <label for="nombre" class="mb-2">Modificar Editorial</label>
-      <input th:value="${editorial.nombre}" type="text" class="form-control" id="nombre" name="nombre">
+      <input required minlength="3" th:value="${editorial.nombre}" type="text" class="form-control" id="nombre" name="nombre">
     </div>
     <button type="submit" class="btn btn-outline-success">Actualizar</button>
   </form>

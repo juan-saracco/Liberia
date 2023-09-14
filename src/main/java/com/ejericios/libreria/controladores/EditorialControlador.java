@@ -20,6 +20,7 @@ public class EditorialControlador {
 
     @GetMapping("/registrar")
     public String registrar(){
+
         return "editorial_form.html";
     }
 
@@ -50,7 +51,6 @@ public class EditorialControlador {
             return "editorial_lista.html";
 
         }catch (Exception e){
-            modelo.put("error", e);
             return "editorial_modificar.html";
         }
 
@@ -58,16 +58,17 @@ public class EditorialControlador {
 
     @PostMapping("/registro")
     public String registro(@RequestParam String nombre, ModelMap modelo){
+        List<Editorial> editoriales = editorialServicio.obtenerEditoriales();
+        modelo.addAttribute("editoriales", editoriales);
 
         try {
             editorialServicio.crearEditorial(nombre);
-            modelo.put("Exito", "La editorial se registro correctamente");
-        } catch (Exception e) {
-            modelo.put("Error", e);
-            return "editorial_form.html";
-        }
-        return "index.html";
 
+
+        } catch (Exception e) {
+        }
+
+        return "index.html";
     }
 
 
