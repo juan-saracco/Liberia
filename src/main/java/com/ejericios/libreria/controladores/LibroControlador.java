@@ -1,15 +1,17 @@
 package com.ejericios.libreria.controladores;
 
+import com.ejericios.libreria.entidades.Autor;
+import com.ejericios.libreria.entidades.Editorial;
+import com.ejericios.libreria.entidades.Libro;
 import com.ejericios.libreria.servicios.AutorServicio;
 import com.ejericios.libreria.servicios.EditorialServicio;
 import com.ejericios.libreria.servicios.LibroServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,19 +30,75 @@ public class LibroControlador {
 
 
     @GetMapping("/registrar")
-    public String registrar(){
+    public String registrar(ModelMap modelo) {
+        List<Autor> autores = autorServicio.obtenerAutores();
+        List<Editorial> editoriales = editorialServicio.obtenerEditoriales();
+
+        modelo.addAttribute("autores", autores);
+        modelo.addAttribute("editoriales", editoriales);
+
         return "libro_form.html";
     }
 
+    @GetMapping("/lista")
+    public String listar(ModelMap modelo){
+        List<Libro> libros = libroServicio.obtenerLibros();
+        modelo.addAttribute("libros", libros);
+        return "libro_lista";
+    }
+
     @PostMapping("/registro")
-    public String registro(@RequestParam(required = false) Long isbn, @RequestParam String titulo,  @RequestParam(required = false) Integer anio, @RequestParam(required = false) Integer ejemplares, @RequestParam(required = false) Long idEditorial, @RequestParam(required = false) Long idAutor){
+    public String registro(@RequestParam(required = false) Long isbn, @RequestParam String titulo, @RequestParam(required = false) Integer anio, @RequestParam(required = false) Integer ejemplares, @RequestParam(required = false) Long idEditorial, @RequestParam(required = false) Long idAutor, ModelMap model){
         try {
             libroServicio.crearLibro(isbn, titulo, anio, ejemplares, idEditorial, idAutor);
-            return "index.html";
+            model.put("Exito", "El libro fue cargado correctamente");
         } catch (Exception e) {
-            Logger.getLogger(LibroControlador.class.getName()).log(Level.SEVERE,null, e);
+            List<Autor> autores = autorServicio.obtenerAutores();
+            List<Editorial> editoriales = editorialServicio.obtenerEditoriales();
+
+            model.addAttribute("autores", autores);
+            model.addAttribute("editoriales", editoriales);
+            model.put("Error", e);
             return "libro_form.html";
         }
+        return "index.html";
+    }
+
+
+    @GetMapping("/modificar/{id}")
+    public String modificar(@PathVariable String id, ModelMap modelo){
+        Long longId = Long.parseLong(id);
+        modelo.put("libro", libroServicio.obtenerUno(longId));
+
+
+        libroServicio.obtenerUno(longId);
+
+        return "libro_modificar.html";
+    }
+
+    @PostMapping("/modificar/{id}")
+    public String modificar(@PathVariable String id, String isbn, String titulo, String anio, String ejemplares, String idEditorial, String idAutor, ModelMap modelo){
+
+        Long longId = Long.parseLong(id);
+        Long longIsbn = Long.parseLong(isbn);
+        Integer intAnio = Integer.parseInt(anio);
+        Integer intEjemplares = Integer.parseInt(ejemplares);
+        Long longIdEditorial = Long.parseLong(idEditorial);
+        Long longIdAutor = Long.parseLong(idAutor);
+
+        System.out.println("Se esta modificando desde el post el libro: " + libroServicio.obtenerUno(longId));
+
+
+        try {
+            libroServicio.modificarLibro(longId, longIsbn,titulo ,intAnio, intEjemplares, longIdEditorial, longIdAutor);
+            modelo.put("exito", "Se cargo el libro: " + libroServicio.obtenerUno(longId));
+            return "libro_lista.html";
+        }catch (Exception e){
+
+            modelo.put("error", e);
+            return "libro_lista.html";
+        }
+
     }
 
 

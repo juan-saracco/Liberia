@@ -3,41 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <title>Biblioteca</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-
-</head>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous"></head>
 <body>
+<header class="bg-dark text-white">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">
+            Biblioteca
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse container" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Libros
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                        <a class="dropdown-item" href="/libro/lista">Libros</a>
+                        <a class="dropdown-item" href="/libro/registrar">Registrar Libro</a>
+                    </div>
+                </li>
 
-<div class="container">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Autores
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                        <a class="dropdown-item" href="/autor/lista">Autores</a>
+                        <a class="dropdown-item" href="/autor/registrar">Registrar Autor</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Editoriales
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                        <a class="dropdown-item" href="/editorial/lista">Editoriales</a>
+                        <a class="dropdown-item" href="/editorial/registrar">Registrar Editorial</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<div class="container mt-4">
     <h2>Cargar Libros</h2>
     <form th:action="@{/libro/registro}" method="POST">
-        <label>Ingrese el ISBN: </label>
-        <input type="number" name="isbn" placeholder="ISBN">
 
-        <label>Ingrese el titulo:</label>
-        <input type="text" name="titulo" placeholder="Titulo">
+        <div class="form-group">
+            <label for="isbn">Ingrese el ISBN:</label>
+            <input type="number" class="form-control" id="isbn" name="isbn" placeholder="ISBN">
+        </div>
 
-        <label>Ingrese el anio:</label>
-        <input type="number" name="anio" placeholder="Año">
+        <div class="form-group">
+            <label for="titulo">Ingrese el título:</label>
+            <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título">
+        </div>
 
-        <label>Ingrese la cantidad de ejemplares:</label>
-        <input type="number" name="ejemplares" placeholder="Ejemplares">
+        <div class="form-group">
+            <label for="anio">Ingrese el año:</label>
+            <input type="number" class="form-control" id="anio" name="anio" placeholder="Año">
+        </div>
 
-        <label>Ingrese el id de la editorial</label>
-        <input type="number" name="idEditorial" placeholder="Id Editorial">
+        <div class="form-group">
+            <label for="ejemplares">Ingrese la cantidad de ejemplares:</label>
+            <input type="number" class="form-control" id="ejemplares" name="ejemplares" placeholder="Ejemplares">
+        </div>
+        <div class="form-group">
 
-        <label>Ingrese el id del autor</label>
-        <input type="number" name="idAutor" placeholder="Id Autor">
+            <select name="idEditorial">
 
-        <button type="submit">Enviar</button>
+                <option value="">Seleccionar Editorial</option>
+
+                <option
+                        th:each="editorial: ${editoriales}"
+                        th:value="${editorial.id}"
+                        th:text="${editorial.nombre}">
+                </option>
+
+            </select>
+        </div>
+        <div class="form-group">
+
+            <select name="idAutor">
+
+                <option value="">Seleccionar Autor</option>
+                <option
+                        th:each="autor: ${autores}"
+                        th:value="${autor.id}"
+                        th:text="${autor.nombre}">
+                </option>
+
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Enviar</button>
     </form>
-
 </div>
 
 
+<div th:if="${Error != null}" class="card text-white bg-danger mb-3 mensajeError mt-4">
+    <div class="card-body">
+        <h5 class="card-title">Error:</h5>
+        <p class="card-text" th:text="${Error}"></p>
+    </div>
+</div>
 
+<div th:if="${Exito != null}" class="card text-white bg-succes mb-3 mt-4 mensajeExito">
+        <div class="card-body">
+            <h5 class="card-title">Exito!</h5>
+            <p class="card-text" th:text="${Exito}"></p>
+        </div>
+</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
 </body>
 </html>

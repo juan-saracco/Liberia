@@ -57,7 +57,7 @@ public class LibroServicio {
 
     @Transactional
     public void modificarLibro(Long id, Long isbn, String titulo, Integer anio, Integer ejemplares, Long idEditorial, Long idAutor) throws Exception{
-
+        System.out.println("se accedio al metodo modificar");
         validar(isbn, titulo, anio, ejemplares, idEditorial, idAutor);
 
         Optional<Libro> respuestaLibro = libroRepositorio.findById(id);
@@ -95,6 +95,11 @@ public class LibroServicio {
 
     public List<Libro> obtenerLibros(){
         return libroRepositorio.findAll();
+    }
+
+    public Libro obtenerUno(Long id){
+        //System.out.println("se obtuvo el libro " + libroRepositorio.getOne(id));
+        return libroRepositorio.getOne(id);
     }
 
     private void validar(Long isbn, String titulo, Integer anio, Integer ejemplares, Long idEditorial, Long idAutor) throws Exception{

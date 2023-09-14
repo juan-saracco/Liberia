@@ -52,30 +52,39 @@
         </div>
     </nav>
 </header>
-<div class="container mt-4">
-    <h2>Cargar Editoriales</h2>
-    <form th:action="@{/editorial/registro}" method="POST">
-        <div class="form-group">
-            <label for="nombre">Ingrese el nombre de la editorial:</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de la editorial">
-        </div>
-        <button type="submit" class="btn btn-primary mt-3">Enviar</button>
-    </form>
+
+
+<div class="container m-5">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Id del libro</th>
+            <th scope="col">Titulo</th>
+            <th scope="col">Ejemplares</th>
+            <th scope="col">Editorial</th>
+            <th scope="col">Autor</th>
+            <th scope="col">Acciones</th>
+
+        </tr>
+        </thead>
+        <tbody th:each="libro : ${libros}">
+        <tr>
+            <th scope="row" th:text="${libro.id}"></th>
+            <td th:text="${libro.titulo}"></td>
+            <td th:text="${libro.ejemplares}"></td>
+            <td th:text="${libro.editorial.nombre}"></td>
+            <td th:text="${libro.autor.nombre}"></td>
+            <td>
+                <a th:href="@{/libro/modificar/__${libro.id}__}" class="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Modificar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
-<div th:if="${Error != null}" class="card text-white bg-danger mb-3 mensajeError mt-4">
-    <div class="card-body">
-        <h5 class="card-title">Error:</h5>
-        <p class="card-text" th:text="${Error}"></p>
-    </div>
-</div>
 
-<div th:if="${Exito != null}" class="card text-white bg-succes mb-3 mensajeExito mt-4">
-    <div class="card-body">
-        <h5 class="card-title">Exito!</h5>
-        <p class="card-text" th:text="${Exito}"></p>
-    </div>
-</div>
+
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>

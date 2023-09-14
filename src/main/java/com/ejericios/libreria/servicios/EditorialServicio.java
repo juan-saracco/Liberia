@@ -49,6 +49,10 @@ public class EditorialServicio {
         return editorialRepositorio.findAll();
     }
 
+    public Editorial buscarUno(Long id){
+        return editorialRepositorio.getOne(id);
+    }
+
     private void validar(String nombre) throws Exception{
 
         if (nombre == null || nombre.isEmpty()){

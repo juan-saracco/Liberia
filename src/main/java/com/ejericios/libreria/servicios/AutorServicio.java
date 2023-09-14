@@ -54,6 +54,11 @@ public class AutorServicio {
         }
     }
 
+    public Autor buscarUno(Long id){
+        //System.out.println("Autor encontrado en buscar uno: " + autorRepositorio.getOne(id));
+        return autorRepositorio.getOne(id);
+    }
+
     public List<Autor> obtenerAutores(){
         return autorRepositorio.findAll();
     }

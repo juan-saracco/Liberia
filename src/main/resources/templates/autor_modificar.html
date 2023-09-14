@@ -52,29 +52,17 @@
         </div>
     </nav>
 </header>
-<div class="container mt-4">
-    <h2>Cargar Editoriales</h2>
-    <form th:action="@{/editorial/registro}" method="POST">
-        <div class="form-group">
-            <label for="nombre">Ingrese el nombre de la editorial:</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de la editorial">
+
+<div class="container-fluid m-5 contenedor">
+    <form class="form formulario" th:action="@{/autor/modificar/__${autor.id}__}" method="POST">
+        <div class="form-group my-3">
+            <input hidden th:value="${autor.id}" name="id">
+
+            <label for="nombre" class="mb-2">Modificar Autor</label>
+            <input th:value="${autor.nombre}" type="text" class="form-control" id="nombre" name="nombre">
         </div>
-        <button type="submit" class="btn btn-primary mt-3">Enviar</button>
+        <button type="submit" class="btn btn-outline-success">Actualizar</button>
     </form>
-</div>
-
-<div th:if="${Error != null}" class="card text-white bg-danger mb-3 mensajeError mt-4">
-    <div class="card-body">
-        <h5 class="card-title">Error:</h5>
-        <p class="card-text" th:text="${Error}"></p>
-    </div>
-</div>
-
-<div th:if="${Exito != null}" class="card text-white bg-succes mb-3 mensajeExito mt-4">
-    <div class="card-body">
-        <h5 class="card-title">Exito!</h5>
-        <p class="card-text" th:text="${Exito}"></p>
-    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
