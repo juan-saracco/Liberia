@@ -69,15 +69,13 @@ public class LibroControlador {
     public String modificar(@PathVariable String id, ModelMap modelo){
         Long longId = Long.parseLong(id);
         modelo.put("libro", libroServicio.obtenerUno(longId));
-
-
         libroServicio.obtenerUno(longId);
 
         return "libro_modificar.html";
     }
 
     @PostMapping("/modificar/{id}")
-    public String modificar(@PathVariable String id, String isbn, String titulo, String anio, String ejemplares, String idEditorial, String idAutor, ModelMap modelo){
+    public String modificar(@PathVariable String id, String isbn, String titulo, String anio, String ejemplares, String idEditorial, String idAutor, ModelMap modelo) throws Exception {
 
         Long longId = Long.parseLong(id);
         Long longIsbn = Long.parseLong(isbn);
@@ -94,8 +92,7 @@ public class LibroControlador {
 
             return "redirect:../lista";
         }catch (Exception e){
-            modelo.put("error", e);
-            return "libro_lista.html";
+            throw new Exception(e.getMessage());
         }
 
     }
