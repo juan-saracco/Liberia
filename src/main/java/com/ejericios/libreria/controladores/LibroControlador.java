@@ -48,18 +48,12 @@ public class LibroControlador {
     }
 
     @PostMapping("/registro")
-    public String registro(@RequestParam(required = false) Long isbn, @RequestParam String titulo, @RequestParam(required = false) Integer anio, @RequestParam(required = false) Integer ejemplares, @RequestParam(required = false) Long idEditorial, @RequestParam(required = false) Long idAutor, ModelMap model){
+    public String registro(@RequestParam(required = false) Long isbn, @RequestParam String titulo, @RequestParam(required = false) Integer anio, @RequestParam(required = false) Integer ejemplares, @RequestParam(required = false) Long idEditorial, @RequestParam(required = false) Long idAutor, ModelMap model) throws Exception {
         try {
             libroServicio.crearLibro(isbn, titulo, anio, ejemplares, idEditorial, idAutor);
             model.put("Exito", "El libro fue cargado correctamente");
         } catch (Exception e) {
-            List<Autor> autores = autorServicio.obtenerAutores();
-            List<Editorial> editoriales = editorialServicio.obtenerEditoriales();
-
-            model.addAttribute("autores", autores);
-            model.addAttribute("editoriales", editoriales);
-            model.put("Error", e);
-            return "libro_form.html";
+            throw new Exception(e);
         }
         return "index.html";
     }
@@ -70,6 +64,11 @@ public class LibroControlador {
         Long longId = Long.parseLong(id);
         modelo.put("libro", libroServicio.obtenerUno(longId));
         libroServicio.obtenerUno(longId);
+        List<Autor> autores = autorServicio.obtenerAutores();
+        List<Editorial> editoriales = editorialServicio.obtenerEditoriales();
+
+        modelo.addAttribute("autores", autores);
+        modelo.addAttribute("editoriales", editoriales);
 
         return "libro_modificar.html";
     }
@@ -84,7 +83,6 @@ public class LibroControlador {
         Long longIdEditorial = Long.parseLong(idEditorial);
         Long longIdAutor = Long.parseLong(idAutor);
 
-        System.out.println("Se esta modificando desde el post el libro: " + libroServicio.obtenerUno(longId));
 
 
         try {

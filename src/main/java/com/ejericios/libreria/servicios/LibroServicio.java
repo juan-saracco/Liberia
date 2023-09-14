@@ -57,7 +57,7 @@ public class LibroServicio {
 
     @Transactional
     public void modificarLibro(Long id, Long isbn, String titulo, Integer anio, Integer ejemplares, Long idEditorial, Long idAutor) throws Exception{
-        System.out.println("se accedio al metodo modificar");
+        //System.out.println("se accedio al metodo modificar");
         validar(isbn, titulo, anio, ejemplares, idEditorial, idAutor);
 
         Optional<Libro> respuestaLibro = libroRepositorio.findById(id);

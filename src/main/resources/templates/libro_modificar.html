@@ -73,11 +73,27 @@
             <label for="ejemplares" class="mb-2">Ejemplares</label>
             <input required minlength="3" th:value="${libro.ejemplares}" type="number" class="form-control mb-3" id="ejemplares" name="ejemplares">
 
-            <label for="idEditorial" class="mb-2">Editorial</label>
-            <input required minlength="3" th:value="${libro.editorial.id}" type="number" class="form-control mb-3" id="idEditorial" name="idEditorial">
+            <div class="form-group">
+                <select required name="idEditorial">
+                    <option value="">Seleccionar Editorial</option>
+                    <option th:each="editorial: ${editoriales}"
+                            th:value="${editorial.id}"
+                            th:text="${editorial.nombre}"
+                    >
+                    </option>
+                </select>
+            </div>
 
-            <label for="idAutor" class="mb-2">Autor</label>
-            <input required minlength="3" th:value="${libro.autor.id}" type="number" class="form-control mb-2" id="idAutor" name="idAutor">
+            <div class="form-group">
+                <select required name="idAutor">
+                    <option value="">Seleccionar Autor</option>
+                    <option th:each="autor: ${autores}"
+                            th:value="${autor.id}"
+                            th:text="${autor.nombre}"
+                    >
+                    </option>
+                </select>
+            </div>
 
         </div>
         <button type="submit" class="btn btn-outline-success">Actualizar</button>
