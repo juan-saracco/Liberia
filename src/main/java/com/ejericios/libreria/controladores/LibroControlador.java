@@ -7,6 +7,7 @@ import com.ejericios.libreria.servicios.AutorServicio;
 import com.ejericios.libreria.servicios.EditorialServicio;
 import com.ejericios.libreria.servicios.LibroServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -92,6 +93,20 @@ public class LibroControlador {
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
+    }
+
+    @PostMapping("/borrar/{id}")
+    public String borrar(@PathVariable String id) throws Exception {
+        Long longId = Long.parseLong(id);
+
+        try {
+            libroServicio.borrar(longId);
+
+        }catch (Exception e){
+            throw new Exception(e);
+        }
+
+        return "index.html";
     }
 
 

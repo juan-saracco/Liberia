@@ -93,6 +93,11 @@ public class LibroServicio {
         }
     }
 
+    @Transactional
+    public void borrar(Long id){
+        libroRepositorio.delete(libroRepositorio.getById(id));
+    }
+
     public List<Libro> obtenerLibros(){
         return libroRepositorio.findAll();
     }
