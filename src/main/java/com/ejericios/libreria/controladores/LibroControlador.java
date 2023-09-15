@@ -61,9 +61,12 @@ public class LibroControlador {
 
     @GetMapping("/modificar/{id}")
     public String modificar(@PathVariable String id, ModelMap modelo){
+
         Long longId = Long.parseLong(id);
         modelo.put("libro", libroServicio.obtenerUno(longId));
         libroServicio.obtenerUno(longId);
+
+
         List<Autor> autores = autorServicio.obtenerAutores();
         List<Editorial> editoriales = editorialServicio.obtenerEditoriales();
 
@@ -83,16 +86,12 @@ public class LibroControlador {
         Long longIdEditorial = Long.parseLong(idEditorial);
         Long longIdAutor = Long.parseLong(idAutor);
 
-
-
         try {
             libroServicio.modificarLibro(longId, longIsbn,titulo ,intAnio, intEjemplares, longIdEditorial, longIdAutor);
-
             return "redirect:../lista";
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
-
     }
 
 
