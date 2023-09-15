@@ -64,7 +64,7 @@ public class AutorControlador {
     }
 
     @PostMapping("/borrar/{id}")
-    public String borrar(@PathVariable String id,ModelMap modelo) throws Exception {
+    public String borrar(@PathVariable String id,ModelMap modelo){
         Long longId = Long.parseLong(id);
 
         try {

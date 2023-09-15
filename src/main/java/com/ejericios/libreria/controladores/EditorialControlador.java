@@ -62,25 +62,27 @@ public class EditorialControlador {
         modelo.addAttribute("editoriales", editoriales);
 
         try {
+            modelo.put("exito", "Se creo la Editorial: " + nombre);
             editorialServicio.crearEditorial(nombre);
-
-
         } catch (Exception e) {
+            modelo.put("error", "Error: " +e.getMessage());
         }
 
         return "index.html";
     }
 
     @PostMapping("/borrar/{id}")
-    public String borrar(@PathVariable String id) throws Exception {
+    public String borrar(@PathVariable String id, ModelMap modelo){
         Long longId = Long.parseLong(id);
 
         try {
+            modelo.put("exito", "Se elimino la Editorial: "+ editorialServicio.buscarUno(longId).getNombre());
             editorialServicio.borrar(longId);
-            return "index.html";
+
         }catch (Exception e){
-            throw new Exception(e);
+            modelo.put("error", "Error: no se puede borrar una Editorial de un libro existente. Borre su libro primero.");
         }
+        return "index.html";
     }
 
 }
