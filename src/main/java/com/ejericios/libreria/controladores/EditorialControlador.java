@@ -71,5 +71,16 @@ public class EditorialControlador {
         return "index.html";
     }
 
+    @PostMapping("/borrar/{id}")
+    public String borrar(@PathVariable String id) throws Exception {
+        Long longId = Long.parseLong(id);
+
+        try {
+            editorialServicio.borrar(longId);
+            return "index.html";
+        }catch (Exception e){
+            throw new Exception(e);
+        }
+    }
 
 }

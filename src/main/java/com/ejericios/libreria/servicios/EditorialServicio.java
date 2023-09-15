@@ -45,6 +45,11 @@ public class EditorialServicio {
 
     }
 
+    @Transactional
+    public void borrar(Long id){
+        editorialRepositorio.delete(buscarUno(id));
+    }
+
     public List<Editorial> obtenerEditoriales(){
         return editorialRepositorio.findAll();
     }

@@ -18,7 +18,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-auto p-1 mr-5">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Libros
@@ -56,7 +56,7 @@
 <div class="container p-1 my-3 contenedor">
     <h2>Modificar Libro</h2>
 
-    <form class="form formulario" th:action="@{/libro/modificar/__${libro.id}__}" method="POST">
+    <form class="form formulario mb-3" th:action="@{/libro/modificar/__${libro.id}__}" method="POST">
         <div class="form-group my-3">
 
             <input hidden th:value="${libro.id}" name="id">
@@ -101,16 +101,17 @@
         </div>
         <button type="submit" class="btn btn-outline-success">Actualizar</button>
     </form>
+    <div >
+        <form class="form formulario" th:action="@{/libro/borrar/__${libro.id}__}" method="POST">
+            <div class="form-group mt-2">
+                <input hidden th:value="${libro.id}" name="id">
+                <button type="submit" class="btn btn-outline-danger">Eliminar</button>
+            </div>
+        </form>
+    </div>
 </div>
 
-<div class="px-5 mx-4">
-    <form class="form formulario" th:action="@{/libro/borrar/__${libro.id}__}" method="POST">
-        <div class="form-group mt-2">
-            <input hidden th:value="${libro.id}" name="id">
-            <button type="submit" class="btn btn-outline-danger">Eliminar</button>
-        </div>
-    </form>
-</div>
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>

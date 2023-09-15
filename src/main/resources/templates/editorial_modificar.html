@@ -18,7 +18,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse " id="navbarNav">
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav ml-auto p-1 mr-5">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Libros
@@ -65,6 +65,14 @@
     </div>
     <button type="submit" class="btn btn-outline-success">Actualizar</button>
   </form>
+  <div >
+    <form class="form formulario" th:action="@{/editorial/borrar/__${editorial.id}__}" method="POST">
+      <div class="form-group mt-2">
+        <input hidden th:value="${editorial.id}" name="id">
+        <button type="submit" class="btn btn-outline-danger">Eliminar</button>
+      </div>
+    </form>
+  </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
