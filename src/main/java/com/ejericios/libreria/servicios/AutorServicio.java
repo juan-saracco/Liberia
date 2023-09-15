@@ -43,15 +43,8 @@ public class AutorServicio {
     }
 
     @Transactional
-    public void borrarAutor(Long id) throws Exception{
-        Optional<Autor> respuesta = autorRepositorio.findById(id);
-
-        if(respuesta.isPresent()){
-            Autor autor = respuesta.get();
-            autorRepositorio.delete(autor);
-        }else{
-            throw new Exception("No se encontro el autor");
-        }
+    public void borrarAutor(Long id){
+       autorRepositorio.delete(buscarUno(id));
     }
 
     public Autor buscarUno(Long id){

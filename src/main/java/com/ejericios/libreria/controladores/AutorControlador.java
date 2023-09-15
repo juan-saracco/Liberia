@@ -64,6 +64,16 @@ public class AutorControlador {
         return "index.html";
     }
 
+    @PostMapping("/borrar/{id}")
+    public String borrar(@PathVariable String id) throws Exception {
+        Long longId = Long.parseLong(id);
 
+        try {
+            autorServicio.borrarAutor(longId);
+            return "index.html";
+        }catch (Exception e){
+            throw new Exception(e);
+        }
+    }
 
 }

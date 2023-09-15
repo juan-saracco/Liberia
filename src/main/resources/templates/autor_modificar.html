@@ -65,6 +65,14 @@
         </div>
         <button type="submit" class="btn btn-outline-success">Actualizar</button>
     </form>
+    <div >
+        <form class="form formulario" th:action="@{/autor/borrar/__${autor.id}__}" method="POST">
+            <div class="form-group mt-2">
+                <input hidden th:value="${autor.id}" name="id">
+                <button type="submit" class="btn btn-outline-danger">Eliminar</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
