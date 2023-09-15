@@ -32,8 +32,6 @@ public class AutorControlador {
     @GetMapping("/modificar/{id}")
     public String modificar(@PathVariable String id, ModelMap modelo){
         Long longId = Long.parseLong(id);
-        System.out.println("Se esta accediendo al autor con id:" + longId);
-        System.out.println("Se encontro el autor:" + autorServicio.buscarUno(longId));
 
         modelo.put("autor", autorServicio.buscarUno(longId));
 
@@ -43,7 +41,6 @@ public class AutorControlador {
 
     @PostMapping("/modificar/{id}")
     public String modificar(@PathVariable String id, String nombre){
-        System.out.println("Esta llegando el string desde el post: " + id);
         Long longId = Long.parseLong(id);
         try {
             autorServicio.modificarAutor(longId, nombre);
@@ -55,25 +52,29 @@ public class AutorControlador {
     }
 
     @PostMapping("/registro")
-    public String registro(@RequestParam String nombre){
+    public String registro(@RequestParam String nombre,ModelMap modelo) throws Exception {
         try {
             autorServicio.crearAutor(nombre);
+            modelo.put("exito", "Se creo el autor " + nombre);
         } catch (Exception e) {
-            return "autor_form.html";
+            modelo.put("error", "Error: " +e.getMessage());
+            throw new Exception(e);
         }
         return "index.html";
     }
 
     @PostMapping("/borrar/{id}")
-    public String borrar(@PathVariable String id) throws Exception {
+    public String borrar(@PathVariable String id,ModelMap modelo) throws Exception {
         Long longId = Long.parseLong(id);
 
         try {
+            modelo.put("exito", "Se elimino el autor: "+ autorServicio.buscarUno(longId).getNombre());
             autorServicio.borrarAutor(longId);
-            return "index.html";
+
         }catch (Exception e){
-            throw new Exception(e);
+            modelo.put("error", "Error: no se puede borrar un Autor de un libro existente. Borre su libro primero.");
         }
+        return "index.html";
     }
 
 }
