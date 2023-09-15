@@ -53,7 +53,7 @@
     </nav>
 </header>
 
-<div class="container p-5 m-5 contenedor">
+<div class="container p-1 my-3 contenedor">
     <h2>Modificar Libro</h2>
 
     <form class="form formulario" th:action="@{/libro/modificar/__${libro.id}__}" method="POST">
@@ -100,6 +100,15 @@
 
         </div>
         <button type="submit" class="btn btn-outline-success">Actualizar</button>
+    </form>
+</div>
+
+<div class="px-5 mx-4">
+    <form class="form formulario" th:action="@{/libro/borrar/__${libro.id}__}" method="POST">
+        <div class="form-group mt-2">
+            <input hidden th:value="${libro.id}" name="id">
+            <button type="submit" class="btn btn-outline-danger">Eliminar</button>
+        </div>
     </form>
 </div>
 
