@@ -47,13 +47,17 @@ public class EditorialControlador {
         modelo.addAttribute("editoriales", editoriales);
 
         try {
+            modelo.put("exito", "Se modifico la Editorial: " + nombre);
+
             editorialServicio.modificarEditorial(longId, nombre);
-            return "editorial_lista.html";
+
 
         }catch (Exception e){
-            return "editorial_modificar.html";
+            modelo.put("error", "Error: " +e.getMessage());
+
         }
 
+        return "editorial_lista.html";
     }
 
     @PostMapping("/registro")

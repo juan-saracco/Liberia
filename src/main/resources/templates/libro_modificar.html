@@ -62,16 +62,16 @@
             <input hidden th:value="${libro.id}" name="id">
 
             <label for="isbn" class="mb-2">Modificar ISBN</label>
-            <input required minlength="3" th:value="${libro.isbn}" type="number" class="form-control mb-3" id="isbn" name="isbn">
+            <input required minlength="13" min="1" th:value="${libro.isbn}" type="number" class="form-control mb-3" id="isbn" name="isbn">
 
             <label for="titulo" class="mb-2">Titulo</label>
             <input required minlength="3" th:value="${libro.titulo}" type="text" class="form-control mb-3" id="titulo" name="titulo">
 
             <label for="anio" class="mb-2">Anio</label>
-            <input required minlength="3" th:value="${libro.anio}" type="number" class="form-control mb-3" id="anio" name="anio">
+            <input required minlength="3" min="1500" th:value="${libro.anio}" type="number" class="form-control mb-3" id="anio" name="anio">
 
             <label for="ejemplares" class="mb-2">Ejemplares</label>
-            <input required minlength="3" th:value="${libro.ejemplares}" type="number" class="form-control mb-3" id="ejemplares" name="ejemplares">
+            <input required minlength="3" min="1" th:value="${libro.ejemplares}" type="number" class="form-control mb-3" id="ejemplares" name="ejemplares">
 
             <div class="form-group">
                 <select required name="idEditorial">
@@ -80,7 +80,6 @@
                             th:value="${editorial.id}"
                             th:text="${editorial.nombre}"
                             th:selected="${editorial.nombre == libro.editorial.nombre}"
-
                     >
                     </option>
                 </select>
